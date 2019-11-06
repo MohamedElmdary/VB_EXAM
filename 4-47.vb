@@ -1,0 +1,70 @@
+Imports System
+Imports System.Collections
+
+public Module module1
+    public class Queue
+        private capacity as Integer
+        private list as New ArrayList()
+        
+        public sub New(ByVal size as Integer)
+            capacity = size
+        End sub
+
+        Function count()
+            return list.Count
+        End Function
+
+        Function isEmpty() as Boolean
+            return count() = 0
+        End Function
+
+        Function isFull() as Boolean
+            return count() = capacity
+        End Function
+
+        public sub enQueue(ByVal item as Integer)
+            if Not isFull()
+                list.Add(item)
+            End if
+        End sub
+
+        Function deQueue()
+            if Not isEmpty()
+                Dim temp as Integer = list.Item(0)
+                list.RemoveAt(0)
+                return temp
+            End if
+            return Nothing
+        End Function
+
+        Function peek()
+            if Not isEmpty()
+                return list.Item(0)
+            End if
+            return Nothing
+        End Function
+
+        public sub printItems()
+            For i as Integer = 0 To count() - 1
+                Console.Write(list.Item(i) & " ")
+            Next
+            Console.WriteLine()
+        End sub
+    
+    End class
+
+    public sub Main()
+        Dim queue as New Queue(100)
+        queue.enQueue(1)
+        queue.enQueue(3)
+        queue.enQueue(2)
+        Console.WriteLine(queue.count())
+        Console.WriteLine(queue.peek())
+        queue.printItems()
+        Console.WriteLine(queue.deQueue())
+        Console.WriteLine(queue.peek())
+        queue.printItems()
+
+    End sub
+
+End Module
